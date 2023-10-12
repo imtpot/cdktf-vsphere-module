@@ -1,0 +1,20 @@
+instance-id: "iid-{{ name }}"
+local-hostname: {{ name }}
+public-keys:
+  - {{ ssh_key }}
+
+network:
+  version: 2
+  ethernets:
+    {% for network_name, network_details in networks.items() %}
+    {{ network_details.interface }}:
+      {% if network_details.ip_address %}
+      addresses:
+        - {{ network_details.ip_address }}
+      gateway4: {{ network_details.gateway if network_details.gateway else '.'.join(network_details.ip_address.split('/')[0].split('.')[:-1]) + '.1' }}
+      nameservers:
+        addresses: {{ network_details.dns_servers if network_details.dns_servers else ['8.8.8.8', '1.1.1.1'] }}
+      {% else %}
+      dhcp4: true
+      {% endif %}
+    {% endfor %}
