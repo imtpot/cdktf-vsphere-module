@@ -15,7 +15,7 @@ class VMDefaults:
     DATACENTER = "Datacenter"
     CLUSTER = "dell-cluster-1"
     DATASTORE = "nfs_default_1"
-    TEMPLATE = "rocky-9.2"
+    TEMPLATE = "rocky-9-template"
     SSH_KEY = "~/.ssh/id_ed25519.pub"
     FIRMWARE = "efi"
 
